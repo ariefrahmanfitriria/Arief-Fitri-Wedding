@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Untitled</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wedding of Arief & Fitri</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #A1C6EA; /* Biru Laut */
+            color: #333333;
+            text-align: center;
+        }
+        .cover {
+            position: relative;
+            height: 100vh;
+            background: url('https://i.imgur.com/EYlkZvW.jpeg') center 30%/cover no-repeat; /* Menurunkan gambar */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .cover h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2em;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .cover .button-container {
+            margin-top: 20px;
+        }
+        .cover button {
+            background-color: #60A3D9;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s;
+            pointer-events: none; /* Tombol tidak bisa diklik sebelum diaktifkan */
+        }
+        .cover button.enabled {
+            pointer-events: auto; /* Mengaktifkan tombol */
+            background-color: #1B3C75;
+        }
+        .cover button:hover {
+            background-color: #1B3C75;
+        }
+        .invitation {
+            display: none;
+            padding: 20px;
+        }
+        .flower-frame {
+            border: 5px solid #1B3C75;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: #ffffff;
+            display: inline-block;
+            max-width: 600px;
+            margin: auto;
+        }
+        .flower-frame h3 {
+            font-family: 'Poppins', sans-serif;
+            color: #1B3C75;
+        }
+        .countdown {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+        .footer {
+            background-color: #60A3D9;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 0.9em;
+            color: #F1FAEE;
+        }
+        .image-container img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .rsvp {
+            background-color: #ffffff;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .rsvp input, .rsvp select, .rsvp textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .rsvp button {
+            background-color: #60A3D9;
+            border: none;
+            padding: 10px 15px;
+            color: white;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .rsvp button:hover {
+            background-color: #1B3C75;
+        }
+        #rsvpList {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .rsvp-entry {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cover">
+        <h1>The Wedding of Arief & Fitri</h1>
+        <div class="rsvp">
+            <h3>Konfirmasi Kehadiran & Buku Tamu</h3>
+            <p>Silakan isi nama dan pilih apakah kamu akan hadir:</p>
+            <input type="text" id="guestName" placeholder="Masukkan namamu..." oninput="checkForm()">
+            
+            <select id="attendance" oninput="checkForm()">
+                <option value="Hadir">Hadir</option>
+                <option value="Tidak Hadir">Tidak Hadir</option>
+            </select>
+
+            <textarea id="guestMessage" placeholder="Tulis doa atau pesan untuk pengantin..." oninput="checkForm()"></textarea>
+
+            <button id="openInvitationButton" onclick="showInvitation()">Buka Undangan</button>
+        </div>
+        <h2>25 Januari 2025</h2>
+    </div>
+
+    <div class="invitation" id="invitation">
+        <div class="flower-frame">
+            <h3>Tanggal:</h3>
+            <p>Sabtu, 25 Januari 2025</p>
+            <h3>Waktu:</h3>
+            <p>Akad : 10:00 - selesai</p>
+            <p>Resepsi : 10.30 - 12.00</p>
+            <h3>Tempat:</h3>
+            <p>Kediaman Mempelai Wanita (Plalar Kopeng, Getasan Kab. Semarang)</p>
+            <p><a href="https://maps.app.goo.gl/nd8VjCJPmwMbeDaQ9">Link Maps</a></p>
+        </div>
+        <div class="image-container">
+            <img src="https://i.imgur.com/EYlkZvW.jpeg" alt="Arief & Fitri 1">
+            <img src="https://i.imgur.com/WZOOCwa.jpeg" alt="Arief & Fitri 2">
+            <img src="https://i.imgur.com/UhBTNTp.jpeg" alt="Arief & Fitri 3">
+            <img src="https://i.imgur.com/r6BNk29.jpeg" alt="Arief & Fitri 4">
+        </div>
+        <div id="countdown" class="countdown">
+            <p>Waktu Menuju Acara:</p>
+            <p id="timer">Loading...</p>
+        </div>
+        <p>Kami mengharapkan anda hadir dengan membawa kebahagiaan dan doa terbaik Anda!</p>
+        <audio id="weddingMusic" controls autoplay loop>
+            <source src="shane-filan-beautiful-in-white-official-video-128-ytshorts.savetube.me.mp3" type="audio/mp3">
+        </audio>
+        
+        <div id="rsvpList">
+            <h3>Daftar Kehadiran & Doa:</h3>
+            <!-- Daftar akan tampil di sini -->
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 The Wedding of Arief & Fitri. Together Forever.</p>
+    </div>
+
+    <script>
+        function showInvitation() {
+            document.querySelector('.cover').style.display = 'none';
+            document.getElementById('invitation').style.display = 'block';
+            document.getElementById('weddingMusic').play();
+
+            // Menambahkan entri ke daftar
+            const guestName = document.getElementById("guestName").value.trim();
+            const attendance = document.getElementById("attendance").value;
+            const guestMessage = document.getElementById("guestMessage").value.trim();
+
+            const rsvpList = document.getElementById("rsvpList");
+            const newEntry = document.createElement("div");
+            newEntry.classList.add("rsvp-entry");
+
+            newEntry.innerHTML = `<strong>${guestName}</strong> (${attendance})<br><p>${guestMessage}</p>`;
+            rsvpList.appendChild(newEntry);
+        }
+
+        function checkForm() {
+            const guestName = document.getElementById("guestName").value.trim();
+            const attendance = document.getElementById("attendance").value;
+            const guestMessage = document.getElementById("guestMessage").value.trim();
+            const button = document.getElementById("openInvitationButton");
+
+            if (guestName && attendance && guestMessage) {
+                button.classList.add("enabled");
+            } else {
+                button.classList.remove("enabled");
+            }
+        }
+
+        const eventDate = new Date("2025-01-25T10:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = eventDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerHTML = `${days} Hari ${hours} Jam ${minutes} Menit ${seconds} Detik`;
+
+            if (timeLeft < 0) {
+                document.getElementById("timer").innerHTML = "Acara telah dimulai!";
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
